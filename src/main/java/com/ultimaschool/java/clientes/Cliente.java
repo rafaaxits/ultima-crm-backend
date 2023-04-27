@@ -1,9 +1,12 @@
 package com.ultimaschool.java.clientes;
 
 public class Cliente {
+    private String nomeCompleto;
+    private String primeiroNome;
+    private String nomesDoMeio;
+    private String sobrenome;
     private String cpf;
     private String email;
-    private String nomeCompleto;
     private char genero;
 
     public Cliente(String cpf, String email, String nomeCompleto, char genero) {
