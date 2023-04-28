@@ -1,6 +1,7 @@
 package com.ultimaschool.java;
 
 import com.ultimaschool.java.clientes.Cliente;
+import com.ultimaschool.java.clientes.ClienteBuilder;
 
 public class Main {
     public static void main(String[] args) {
@@ -16,5 +17,16 @@ public class Main {
         System.out.println(clienteM.toString());
         System.out.println(clienteF.toString());
         System.out.println(clienteVazio.toString());
+
+        ClienteBuilder clienteMBuilder = new ClienteBuilder().comIdentificacao(clienteM.getPrimeiroNome(),
+                clienteM.getNomesDoMeio(), clienteM.getSobrenome(), clienteM.getCpf(), clienteM.getDataDeNascimento(),
+                clienteM.getGenero()).comContatos(clienteM.getEmail(), clienteM.getEndereco(), clienteM.getTelefone());
+        System.out.println(clienteMBuilder.toStringIdentificacao());
+        System.out.println(clienteMBuilder.toStringContatos());
+
+
+        ClienteBuilder clienteFBuilder = new ClienteBuilder();
+        clienteFBuilder.comContatos(clienteF.getEmail(), clienteF.getEndereco(), clienteF.getTelefone());
+        System.out.println(clienteFBuilder.toStringContatos());
     }
 }
