@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class Cliente {
+public class ClienteBuilder {
     private String nomeCompleto;
     private String primeiroNome;
     private String nomesDoMeio;
@@ -18,9 +18,8 @@ public class Cliente {
     private String endereco;
     private String telefone;
 
-    public Cliente(String primeiroNome, String nomesDoMeio, String sobrenome, String cpf,
-                   String dataDeNascimento, char genero, String email, String endereco,
-                   String telefone) {
+    public ClienteBuilder comIdentificacao(String primeiroNome, String nomesDoMeio, String sobrenome, String cpf,
+                   String dataDeNascimento, char genero) {
         this.primeiroNome = primeiroNome;
         this.nomesDoMeio = nomesDoMeio;
         this.sobrenome = sobrenome;
@@ -29,9 +28,14 @@ public class Cliente {
         this.dataDeNascimento = dataDeNascimento;
         this.idadeAtual = definirIdadeAtual();
         this.genero = genero;
+        return this;
+    }
+
+    public ClienteBuilder comContatos(String email, String endereco, String telefone) {
         this.email = email;
         this.endereco = endereco;
         this.telefone = telefone;
+        return this;
     }
 
     private int definirIdadeAtual() {
@@ -168,6 +172,17 @@ public class Cliente {
         return tratamentoGenereo() + " " + getNomeCompleto() + ", com CPF " +
                 getCpf() + ", data de nascimento " + getDataDeNascimento() +
                 " com idade de " + getIdadeAtual() + ", e-mail " + getEmail() +
+                ", endereço " + getEndereco() + " e telefone " + getTelefone();
+    }
+
+    public String toStringIdentificacao() {
+        return "Os dados da pessoa são: " + tratamentoGenereo() + " " + getNomeCompleto() +
+                ", com CPF " +  getCpf() + ", data de nascimento " +
+                getDataDeNascimento() + " com idade de " + getIdadeAtual();
+    }
+
+    public String toStringContatos() {
+        return "Os dados de contatos são: e-mail " + getEmail() +
                 ", endereço " + getEndereco() + " e telefone " + getTelefone();
     }
 }
