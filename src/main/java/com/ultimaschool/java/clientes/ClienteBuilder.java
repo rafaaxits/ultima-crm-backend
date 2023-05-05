@@ -1,11 +1,18 @@
 package com.ultimaschool.java.clientes;
 
+import com.ultimaschool.java.exceptions.InvalidaEmailException;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 public class ClienteBuilder {
+    private static final String EMAIL_REGEX = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
+            + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+
+    private static final String PHONE_NUMBER_REGEX = "(\\([0-9]{2}\\)\\s?[0-9].{4,5}-?[0-9]{3,4})|([0-9]{10,11})|" +
+            "([0-9]{2}\\s?[0-9]{8,9})";
     private String nomeCompleto;
     private String primeiroNome;
     private String nomesDoMeio;
@@ -137,8 +144,12 @@ public class ClienteBuilder {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail(String email) throws InvalidaEmailException {
+        if(email.matches(EMAIL_REGEX)) {
+            this.email = email;
+        } else {
+            throw new InvalidaEmailException(email);
+        }
     }
 
     public String getEndereco() {
@@ -154,7 +165,9 @@ public class ClienteBuilder {
     }
 
     public void setTelefone(String telefone) {
-        this.telefone = telefone;
+        if(telefone.matches(PHONE_NUMBER_REGEX)) {
+            this.telefone = telefone;
+        }
     }
 
     private String tratamentoGenereo() {
