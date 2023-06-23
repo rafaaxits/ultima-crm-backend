@@ -1,11 +1,16 @@
 package com.ultimaschool.java;
 
-import com.ultimaschool.java.clientes.Cliente;
-import com.ultimaschool.java.clientes.ClienteBuilder;
+import com.ultimaschool.java.model.Produto;
+import com.ultimaschool.java.repository.DatabaseConnection;
+import com.ultimaschool.java.repository.ProdutoRepository;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
-    public static void main(String[] args) {
-        Cliente clienteM = new Cliente("João", "Teste da", "Silva",
+    public static void main(String[] args) throws SQLException {
+        /*Cliente clienteM = new Cliente("João", "Teste da", "Silva",
                 "123.456.789-00", "10/01/1993", 'M', "joao_teste@mail.com",
                 "Av Agamenom", "9.99999-9999");
         Cliente clienteF = new Cliente("Maria", "Teste da", "Silva",
@@ -27,6 +32,40 @@ public class Main {
 
         ClienteBuilder clienteFBuilder = new ClienteBuilder();
         clienteFBuilder.comContatos(clienteF.getEmail(), clienteF.getEndereco(), clienteF.getTelefone());
-        System.out.println(clienteFBuilder.toStringContatos());
+        System.out.println(clienteFBuilder.toStringContatos());*/
+
+        ProdutoRepository produtoRepository = new ProdutoRepository();
+        //produtoRepository.findAll().forEach(System.out::println);
+
+        Produto produto = produtoRepository.findById(54);
+        if(produto != null) {
+            System.out.println(produto);
+        } else {
+            System.out.println("Produto não existe");
+        }
+
+        Produto produtoInsert = new Produto("Relógio smart", 159.30);
+        //produtoRepository.insert(produtoInsert);
+
+        Produto produtoUpdate = produtoRepository.findById(54);
+        produtoUpdate.setNome("Apple Watch Series 8");
+        produtoUpdate.setPreco(6999.99);
+
+        produtoRepository.update(produtoUpdate);
+
+        produto = produtoRepository.findById(54);
+        if(produto != null) {
+            System.out.println(produto);
+        } else {
+            System.out.println("Produto não existe");
+        }
+
+        produtoRepository.delete(54);
+        produto = produtoRepository.findById(53);
+        if(produto != null) {
+            System.out.println(produto);
+        } else {
+            System.out.println("Produto não existe");
+        }
     }
 }

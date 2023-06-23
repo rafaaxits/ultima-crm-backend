@@ -1,4 +1,4 @@
-package com.ultimaschool.java.clientes;
+package com.ultimaschool.java.model;
 
 import com.ultimaschool.java.exceptions.InvalidaEmailException;
 import junit.framework.TestCase;

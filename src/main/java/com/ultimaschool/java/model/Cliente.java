@@ -1,4 +1,4 @@
-package com.ultimaschool.java.clientes;
+package com.ultimaschool.java.model;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class Cliente {
+    private int id;
     private String nomeCompleto;
     private String primeiroNome;
     private String nomesDoMeio;
@@ -63,6 +64,14 @@ public class Cliente {
         } else {
             return new SimpleDateFormat(formatoData);
         }
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNomeCompleto() {
